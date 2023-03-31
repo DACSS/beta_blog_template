@@ -58,3 +58,6 @@ _templates/
 
 # shell script
 /*.sh
+
+#shell_script folder
+shell_scripts/
