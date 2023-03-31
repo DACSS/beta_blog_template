@@ -5,15 +5,11 @@ repos:
     -   id: check-yaml
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
--   repo: https://github.com/psf/black
-    rev: 19.3b0
-    hooks:
-    -   id: black
 -   repo: local
     hooks:
     -   id: check-date-format
         name: Check if the date in the qmd file is in proper format
-        entry: sh checkDate.sh
+        entry: sh shell_scripts/checkDate.sh
         language: system
         pass_filenames: false
         stages: [commit]
@@ -21,6 +17,13 @@ repos:
     hooks:
     -   id: exclude-files-from-commit
         name: Exclude files from commit
-        entry: sh excludeFiles.sh
+        entry: sh shell_scripts/excludeFiles.sh
+        language: system
+        stages: [commit]
+-   repo: local
+    hooks:
+    -   id: check-space-in-file
+        name: Check file names are not proper
+        entry: sh shell_scripts/checkSpace.sh
         language: system
         stages: [commit]
