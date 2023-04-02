@@ -1,8 +1,14 @@
-#! /bin/bash
+#!/bin/bash
 
-for file in $(find ./posts -name "*.qmd"); do
-  if ! grep -q -E "date:\s+\"(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)[0-9]{2}\"" "$file"; then
-    echo "File $file does not have the correct date format." >&2; exit 1;
+current_date=$(date "+%m/%d/%Y")
+
+# Find tracked files in the posts directory with the .qmd extension
+files=$(git ls-files --others --exclude-standard -- ./posts/*.qmd)
+
+for file in $files; do
+  if ! grep -q -E "date:\s+\"$current_date\"" "$file"; then
+    echo "File $file does not have the correct date. Make sure you enter today's date in format mm/dd/yyyy" >&2; exit 1;
   fi;
 done;
+
 exit 0
