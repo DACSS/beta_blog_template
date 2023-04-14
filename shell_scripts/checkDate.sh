@@ -3,7 +3,7 @@
 current_date=$(date "+%m/%d/%Y")
 
 # Find tracked files in the posts directory with the .qmd extension
-files=$(git ls-files --others --exclude-standard -- ./posts/*.qmd)
+files=$(git ls-files --others --modified --exclude-standard -- ./posts/*.qmd)
 
 for file in $files; do
   if ! grep -q -E "date:\s+\"$current_date\"" "$file"; then
